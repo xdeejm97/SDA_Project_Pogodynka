@@ -1,6 +1,7 @@
 package pogodynkaApp;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class WeatherApp {
@@ -55,7 +56,9 @@ public class WeatherApp {
     }
 
     private void tryToListLocations() {
-        System.out.println(locationService.getLocations());
+        printStream.println("Listing locations");
+        List<LocationInfo> printedLocations = locationService.getLocations();
+        printedLocations.forEach(printStream::println);
     }
 
 

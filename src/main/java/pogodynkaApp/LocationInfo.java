@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class LocationInfo {
 
-    private int id;
+    private Integer id;
     private String city;
     private String geograficalLength;
     private String geograficalWidth;
