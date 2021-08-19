@@ -1,8 +1,8 @@
-package ResponseFromWeatherAPI;
+package Utililty;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 
-public class Response {
+public class ResponseJson {
     private long id;
     private long longitude;
     private long latitude;
@@ -97,7 +97,7 @@ public class Response {
 
     @Override
     public String toString() {
-        return "Response{" +
+        return "ResponseJson{" +
                 "id=" + id +
                 ", longitude='" + longitude + '\'' +
                 ", latitude='" + latitude + '\'' +
