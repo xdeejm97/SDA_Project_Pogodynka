@@ -19,9 +19,8 @@ public class WeatherApiConnection {
 
     public String getWeather() throws IOException {
 
-
         Request request = new Request.Builder()
-                .url(BASE_URL)
+                .url(BASE_URL + cityName)
                 .build();
         OkHttpClient client = new OkHttpClient();
 
@@ -35,4 +34,5 @@ public class WeatherApiConnection {
         this.weatherData = weatherData;
         this.cityName = cityName;
     }
+
 }

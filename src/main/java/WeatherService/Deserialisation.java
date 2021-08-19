@@ -9,11 +9,12 @@ import java.io.IOException;
 
 public class Deserialisation {
 
-    public Deserialisation() throws IOException {
+    public WeatherDto checkWeather() {
         WeatherApiConnection weatherApiConnection = new WeatherApiConnection();
         ObjectMapper objectMapper = new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        WeatherDto WeatherDataJson = objectMapper.readValue(weatherApiConnection.getWeather(), WeatherDto.class);
+        WeatherDto weatherDataJson = objectMapper.readValue(weatherApiConnection.getWeather(), WeatherDto.class);
+        return weatherDataJson;
     }
 
 }
