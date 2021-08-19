@@ -15,9 +15,8 @@ public class WeatherApiConnection {
             "&query=";
 
     private String weatherData;
-    private String cityName;
 
-    public String getWeather() throws IOException {
+    public String getWeather(String cityName) throws IOException {
 
         Request request = new Request.Builder()
                 .url(BASE_URL + cityName)
@@ -30,9 +29,5 @@ public class WeatherApiConnection {
         return weatherData;
     }
 
-    public WeatherApiConnection(String cityName) {
-        this.weatherData = weatherData;
-        this.cityName = cityName;
-    }
 
 }
