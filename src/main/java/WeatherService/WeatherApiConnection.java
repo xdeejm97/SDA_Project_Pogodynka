@@ -12,9 +12,10 @@ public class WeatherApiConnection {
             "access_key=ae7d7285ae1929c07db941e355149670" +
             "&query=Szczecin";
 
-    public static String weatherData;
+    private String weatherData;
 
-    public static void main(String[] args) throws IOException {
+    public String getWeather() throws IOException {
+
         Request request = new Request.Builder()
                 .url(BASE_URL)
                 .build();
@@ -23,10 +24,6 @@ public class WeatherApiConnection {
         Call call = client.newCall(request);
         Response response = call.execute();
         weatherData = response.body().string();
-        System.out.println(weatherData);
-    }
-
-    public static String getWeatherData() {
         return weatherData;
     }
 }
