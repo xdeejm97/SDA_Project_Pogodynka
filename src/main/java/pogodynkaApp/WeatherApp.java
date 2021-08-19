@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class WeatherApp {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printStream = new PrintStream((System.out));
+    private final LocationService locationService = new LocationService();
 
     public void run(){
         printStream.println("Hello User!");
@@ -23,9 +24,9 @@ public class WeatherApp {
                 printStream.println("Shutting down");
                 shutdownChosen = true;
             } else if (option.equals("a")|| option.equals("add")){
-                // TODO: 18.08.2021 tryToAddLocation
+                tryToAddLocation();
             } else if (option.equals("l") || option.equals("list")){
-                // TODO: 18.08.2021 tryToListLocations
+                tryToListLocations();
             } else if (option.equals("s") || option.equals("show")){
                 // TODO: 18.08.2021  showWeatherParameters
             }
@@ -33,5 +34,31 @@ public class WeatherApp {
         }
         printStream.println("Goodbye!");
     }
+
+    private void tryToAddLocation() {
+        printStream.println("Adding new location");
+
+        printStream.println("Enter city:");
+        String enteredCity = scanner.nextLine();
+        try {
+            //LocationInfo writtenCity = new LocationInfo(enteredCity);
+        } catch (NullPointerException e) {
+            printStream.println("City cannot be empty!");
+            return;
+        }
+
+        LocationInfo currentLocation = new LocationInfo(enteredCity);
+
+        printStream.println("City " + enteredCity + " has been added!");
+
+        locationService.addLocationInfo(currentLocation);
+    }
+
+    private void tryToListLocations() {
+        System.out.println(locationService.getLocations());
+    }
+
+
+
 
 }
