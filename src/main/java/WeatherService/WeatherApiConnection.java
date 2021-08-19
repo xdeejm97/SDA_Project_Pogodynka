@@ -10,7 +10,9 @@ import java.io.IOException;
 public class WeatherApiConnection {
     private final static String BASE_URL = "http://api.weatherstack.com/current?" +
             "access_key=ae7d7285ae1929c07db941e355149670" +
-            "&query=" + "geterdoCity" ;
+            "&query=Szczecin";
+
+    public static String weatherData;
 
     public static void main(String[] args) throws IOException {
         Request request = new Request.Builder()
@@ -20,6 +22,11 @@ public class WeatherApiConnection {
 
         Call call = client.newCall(request);
         Response response = call.execute();
-        System.out.println(response.body().string());
+        weatherData = response.body().string();
+        System.out.println(weatherData);
+    }
+
+    public static String getWeatherData() {
+        return weatherData;
     }
 }
