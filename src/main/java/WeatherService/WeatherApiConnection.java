@@ -1,5 +1,6 @@
 package WeatherService;
 
+import lombok.Data;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -7,14 +8,17 @@ import okhttp3.Response;
 
 import java.io.IOException;
 
+@Data
 public class WeatherApiConnection {
-    private final static String BASE_URL = "http://api.weatherstack.com/current?" +
+    private static String BASE_URL = "http://api.weatherstack.com/current?" +
             "access_key=ae7d7285ae1929c07db941e355149670" +
-            "&query=Szczecin";
+            "&query=";
 
     private String weatherData;
+    private String cityName;
 
     public String getWeather() throws IOException {
+
 
         Request request = new Request.Builder()
                 .url(BASE_URL)
@@ -25,5 +29,10 @@ public class WeatherApiConnection {
         Response response = call.execute();
         weatherData = response.body().string();
         return weatherData;
+    }
+
+    public WeatherApiConnection(String cityName) {
+        this.weatherData = weatherData;
+        this.cityName = cityName;
     }
 }
