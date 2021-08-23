@@ -1,6 +1,7 @@
 package WeatherService;
 
 import utililty.WeatherDto;
+import utililty.WeatherEntity;
 
 import java.io.IOException;
 
@@ -11,8 +12,6 @@ public class WeatherManager {
     public void weatherManagerJSONandDatabase (String cityName) throws IOException {
         String servedResponseEncoded = weatherApiConnection.getWeather(cityName);
         WeatherDto weatherDto = deserialisation.changeStringToMap(servedResponseEncoded);
-
-
     }
 
 }
