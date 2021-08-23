@@ -1,13 +1,29 @@
 package pogodynkaApp;
 
+import Repository.WeatherRepository;
+import WeatherService.WeatherManager;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import utililty.WeatherEntity;
+
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 public class WeatherApp {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printStream = new PrintStream((System.out));
+    private final LocationService locationService = new LocationService();
+    private final WeatherManager weatherManager = new WeatherManager();
+    SessionFactory sessionFactory = new Configuration()
+            .configure("hibernate.cfg.xml")
+            .addAnnotatedClass(WeatherEntity.class)
+            .buildSessionFactory();
 
-    public void run(){
+
+
+    public void run() {
         printStream.println("Hello User!");
 
         boolean shutdownChosen = false;
@@ -23,9 +39,9 @@ public class WeatherApp {
                 printStream.println("Shutting down");
                 shutdownChosen = true;
             } else if (option.equals("a")|| option.equals("add")){
-                // TODO: 18.08.2021 tryToAddLocation
+                tryToAddLocation();
             } else if (option.equals("l") || option.equals("list")){
-                // TODO: 18.08.2021 tryToListLocations
+                tryToListLocations();
             } else if (option.equals("s") || option.equals("show")){
                 // TODO: 18.08.2021  showWeatherParameters
             }
@@ -33,5 +49,42 @@ public class WeatherApp {
         }
         printStream.println("Goodbye!");
     }
+
+    private void tryToAddLocation()  {
+        printStream.println("Adding new location");
+
+        printStream.println("Enter city:");
+        String enteredCity = scanner.nextLine();
+        try {
+            //LocationInfo writtenCity = new LocationInfo(enteredCity);
+        } catch (NullPointerException e) {
+            printStream.println("City cannot be empty!");
+            return;
+        }
+
+        LocationInfo currentLocation = new LocationInfo(enteredCity);
+
+
+        printStream.println("City " + enteredCity + " has been added!");
+
+
+        try {
+            weatherManager.weatherManagerJSONandDatabase(enteredCity);
+        } catch (IOException e){
+            System.out.println("Problem with weatherManagerJSONandDatabase!");
+            e.printStackTrace();
+        }
+
+        locationService.addLocationInfo(currentLocation);
+    }
+
+    private void tryToListLocations() {
+        printStream.println("Listing locations");
+        List<LocationInfo> printedLocations = locationService.getLocations();
+        printedLocations.forEach(printStream::println);
+    }
+
+
+
 
 }
