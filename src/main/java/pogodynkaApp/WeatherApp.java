@@ -1,5 +1,8 @@
 package pogodynkaApp;
 
+import WeatherService.WeatherManager;
+
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
@@ -8,8 +11,9 @@ public class WeatherApp {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printStream = new PrintStream((System.out));
     private final LocationService locationService = new LocationService();
+    private final WeatherManager weatherManager = new WeatherManager();
 
-    public void run(){
+    public void run() {
         printStream.println("Hello User!");
 
         boolean shutdownChosen = false;
@@ -36,7 +40,7 @@ public class WeatherApp {
         printStream.println("Goodbye!");
     }
 
-    private void tryToAddLocation() {
+    private void tryToAddLocation()  {
         printStream.println("Adding new location");
 
         printStream.println("Enter city:");
@@ -50,7 +54,16 @@ public class WeatherApp {
 
         LocationInfo currentLocation = new LocationInfo(enteredCity);
 
+
         printStream.println("City " + enteredCity + " has been added!");
+
+
+        try {
+            weatherManager.weatherManagerJSONandDatabase(enteredCity);
+        } catch (IOException e){
+            System.out.println("Problem with weatherManagerJSONandDatabase!");
+            e.printStackTrace();
+        }
 
         locationService.addLocationInfo(currentLocation);
     }
