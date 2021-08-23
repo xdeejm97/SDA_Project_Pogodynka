@@ -1,6 +1,6 @@
 package WeatherService;
 
-import Utililty.WeatherDto;
+import utililty.WeatherDto;
 
 import java.io.IOException;
 
