@@ -17,7 +17,7 @@ public class WeatherApp {
     private final PrintStream printStream = new PrintStream((System.out));
     private final LocationService locationService = new LocationService();
     private final WeatherManager weatherManager = new WeatherManager();
-    private WeatherEntity weatherEntity = new WeatherEntity();
+    //private WeatherEntity weatherEntity = new WeatherEntity();
 
 
 
@@ -49,6 +49,7 @@ public class WeatherApp {
     }
 
     private void tryToAddLocation(SessionFactory sessionFactory) {
+        WeatherEntity weatherEntity = new WeatherEntity();
         printStream.println("Adding new location");
 
         printStream.println("Enter city:");
