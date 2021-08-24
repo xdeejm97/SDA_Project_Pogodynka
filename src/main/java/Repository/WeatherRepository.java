@@ -5,6 +5,8 @@ import utililty.WeatherEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
+
 //java -cp C:\Users\damia\.m2\repository\com\h2database\h2\1.4.200\h2-1.4.200.jar org.h2.tools.Server -> odpalenie bazy danych H2 wpisać w konsoli ctrl + c (zatrzymuje klienta bazy H2)
 public class WeatherRepository {
     private EntityManager entityManager;
@@ -36,5 +38,10 @@ public class WeatherRepository {
 
             return null;
         }
+    }
+
+    public List<WeatherEntity> listAllNames() {
+        String query = "SELECT name FROM weather_parameters";
+        return entityManager.createQuery(query, WeatherEntity.class).getResultList();
     }
 }

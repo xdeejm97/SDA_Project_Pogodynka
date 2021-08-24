@@ -2,6 +2,7 @@ package pogodynkaApp;
 
 import Repository.WeatherRepository;
 import WeatherService.WeatherManager;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import utililty.WeatherDto;
@@ -12,6 +13,7 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
+@Slf4j
 public class WeatherApp {
     private final Scanner scanner = new Scanner(System.in);
     private final PrintStream printStream = new PrintStream((System.out));
@@ -39,7 +41,7 @@ public class WeatherApp {
             } else if (option.equals("a") || option.equals("add")) {
                 tryToAddLocation(sessionFactory);
             } else if (option.equals("l") || option.equals("list")) {
-                tryToListLocations();
+                tryToListLocations(sessionFactory);
             } else if (option.equals("s") || option.equals("show")) {
                 // TODO: 18.08.2021  showWeatherParameters
             }
@@ -77,8 +79,18 @@ public class WeatherApp {
         locationService.addLocationInfo(currentLocation);
     }
 
-    private void tryToListLocations() {
+    private void tryToListLocations(SessionFactory sessionFactory) {
         printStream.println("Listing locations");
+
+        WeatherRepository weatherRepository = new WeatherRepository(sessionFactory.createEntityManager());
+        weatherRepository.listAllNames().forEach(weatherEntity -> log.info(weatherEntity.toString()));
+//
+//        List<WeatherEntity> printedLocationFromWeatherRepository= weatherRepository.listAllNames();
+//        System.out.println(printedLocationFromWeatherRepository);
+//        printedLocationFromWeatherRepository.forEach(weatherEntity -> log.info(weatherEntity.toString()));
+
+//        printedLocationFromWeatherRepository.forEach(printStream::println);
+
         List<LocationInfo> printedLocations = locationService.getLocations();
         printedLocations.forEach(printStream::println);
     }
