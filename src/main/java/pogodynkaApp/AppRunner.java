@@ -11,17 +11,5 @@ public class AppRunner {
         WeatherApp weatherApp = new WeatherApp();
 
         weatherApp.run();
-        SessionFactory sessionFactory = new Configuration() //zmiany po kursie
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(WeatherEntity.class)
-                .buildSessionFactory();
-
-        saving(sessionFactory);
-
-
-    }
-    private static void saving(SessionFactory sessionFactory1) {
-        WeatherRepository weatherRepository = new WeatherRepository(sessionFactory1.createEntityManager());
-        weatherRepository.saveToDatabase(new WeatherDto(), new WeatherEntity());
     }
 }

@@ -17,6 +17,7 @@ public class WeatherApp {
     private final PrintStream printStream = new PrintStream((System.out));
     private final LocationService locationService = new LocationService();
     private final WeatherManager weatherManager = new WeatherManager();
+    private final WeatherEntity weatherEntity = new WeatherEntity();
 
 
 
@@ -66,7 +67,7 @@ public class WeatherApp {
 
 
         try {
-            weatherManager.weatherManagerJSONandDatabase(enteredCity);
+            weatherManager.weatherManagerJSONandDatabase(enteredCity, weatherEntity);
         } catch (IOException e) {
             System.out.println("Problem with weatherManagerJSONandDatabase!");
             e.printStackTrace();
