@@ -18,9 +18,9 @@ import javax.persistence.*;
 public class WeatherEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
 
-    private int id;
+    private Long id;
     private String name;
     private String country;
     private String lat;

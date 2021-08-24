@@ -17,11 +17,11 @@ public class WeatherApp {
     private final PrintStream printStream = new PrintStream((System.out));
     private final LocationService locationService = new LocationService();
     private final WeatherManager weatherManager = new WeatherManager();
-    private final WeatherEntity weatherEntity = new WeatherEntity();
+    private WeatherEntity weatherEntity = new WeatherEntity();
 
 
 
-    public void run() {
+    public void run(SessionFactory sessionFactory) {
         printStream.println("Hello User!");
 
         boolean shutdownChosen = false;
@@ -37,7 +37,7 @@ public class WeatherApp {
                 printStream.println("Shutting down");
                 shutdownChosen = true;
             } else if (option.equals("a") || option.equals("add")) {
-                tryToAddLocation();
+                tryToAddLocation(sessionFactory);
             } else if (option.equals("l") || option.equals("list")) {
                 tryToListLocations();
             } else if (option.equals("s") || option.equals("show")) {
@@ -48,7 +48,7 @@ public class WeatherApp {
         printStream.println("Goodbye!");
     }
 
-    private void tryToAddLocation() {
+    private void tryToAddLocation(SessionFactory sessionFactory) {
         printStream.println("Adding new location");
 
         printStream.println("Enter city:");
@@ -67,7 +67,7 @@ public class WeatherApp {
 
 
         try {
-            weatherManager.weatherManagerJSONandDatabase(enteredCity, weatherEntity);
+            weatherManager.weatherManagerJSONandDatabase(enteredCity, weatherEntity, sessionFactory);
         } catch (IOException e) {
             System.out.println("Problem with weatherManagerJSONandDatabase!");
             e.printStackTrace();
