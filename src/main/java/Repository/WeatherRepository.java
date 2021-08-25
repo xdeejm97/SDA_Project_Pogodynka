@@ -44,5 +44,7 @@ public class WeatherRepository {
 
 //        String query = "SELECT name FROM weather_parameters";
         return entityManager.createQuery("from WeatherEntity", WeatherEntity.class).getResultList();
+
+
     }
 }
