@@ -8,14 +8,14 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class LocationInfo {
 
-    private Integer id;
+    //private Integer id;
     private String city;
-    private String geograficalLength;
-    private String geograficalWidth;
-    private String country;
+//    private String country;
+//    private String geograficalWidth;
+//    private String geograficalLength;
+//    private long temperature;
 
     public LocationInfo(String city) {
         this.city = city;
