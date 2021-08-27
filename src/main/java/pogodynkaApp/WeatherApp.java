@@ -80,20 +80,25 @@ public class WeatherApp {
     }
 
     private void tryToListLocations(SessionFactory sessionFactory) {
-        printStream.println("Listing locations");
-
-        WeatherRepository weatherRepository = new WeatherRepository(sessionFactory.createEntityManager());
-        weatherRepository.listAllNames().forEach(weatherEntity -> log.info(weatherEntity.toString()));
+//        printStream.println("Listing locations");
 //
-//        List<WeatherEntity> printedLocationFromWeatherRepository= weatherRepository.listAllNames();
-//        System.out.println(printedLocationFromWeatherRepository);
-//        printedLocationFromWeatherRepository.forEach(weatherEntity -> log.info(weatherEntity.toString()));
+        WeatherRepository weatherRepository = new WeatherRepository(sessionFactory.createEntityManager());
+        List<WeatherEntity> printCities = weatherRepository.listAllNames();
+        for (WeatherEntity cities : printCities){
+            System.out.println(cities.getName() + " " + cities.getTemperature()+ " st.C");
+        }
 
-//        printedLocationFromWeatherRepository.forEach(printStream::println);
+////
+////        List<WeatherEntity> printedLocationFromWeatherRepository= weatherRepository.listAllNames();
+////        System.out.println(printedLocationFromWeatherRepository);
+////        printedLocationFromWeatherRepository.forEach(weatherEntity -> log.info(weatherEntity.toString()));
+//
+////        printedLocationFromWeatherRepository.forEach(printStream::println);
+//
+//        List<LocationInfo> printedLocations = locationService.getLocations();
+//        printedLocations.forEach(printStream::println);
 
-        List<LocationInfo> printedLocations = locationService.getLocations();
-        printedLocations.forEach(printStream::println);
-    }
+     }
 
 
 }

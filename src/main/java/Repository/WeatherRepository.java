@@ -42,6 +42,6 @@ public class WeatherRepository {
 
     public List<WeatherEntity> listAllNames() {
         //String query = "SELECT name FROM weather_parameters";
-        return entityManager.createQuery("from WeatherEntity", WeatherEntity.class).getResultList();
+        return entityManager.createQuery("FROM WeatherEntity", WeatherEntity.class).getResultList();
     }
 }
